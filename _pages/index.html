@@ -1,0 +1,33 @@
+---
+layout: default
+id: overview
+nav: true
+nav-order: 1
+title: Overview
+intro: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum possimus doloremque, voluptates tempore accusamus alias nihil sunt nesciunt placeat perspiciatis adipisci est maiores dolorem quos aperiam! Quo ratione rem ex voluptate tempora, rerum aliquid facere nesciunt architecto voluptatibus voluptas. Officiis pariatur sed esse, reiciendis totam fugiat in! Ex, quos?
+---
+
+<div class="container container--xl text--center text--lg space--xxxxl">
+  <p>{{page.intro}}</p>
+</div>
+
+<div class="container">
+  <div class="row row--xxl-6-6">
+    {% assign content-pages = site.html_pages | where: 'content-pages', 'true' | sort: 'nav-order' %}
+    {% for page in content-pages %}
+      <div class="col">
+        <div class="bg-img bg-img--4-3 bg-img--md-16-9 bg-img--xxl-3-2" style="background-image: url('{{site.img}}/img.jpg');">
+          <a href="{{site.baseurl}}{{page.url}}" class="bg-img__link"></a>
+          <div class="bg-img__content">
+            <div class="title title--lg">{{page.title}}</div>
+          </div>
+          <div class="bg-img__bg-overlay"></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="space--xxxxl"></div>
+
+{% include page/promo-comp.html %}
