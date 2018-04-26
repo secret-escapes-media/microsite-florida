@@ -17,6 +17,9 @@
   &--orange { background-color: $orange;
     &:hover { background-color: $orange-dark; }
   }
+  &--red { background-color: $v-red;
+    &:hover { background-color: $v-red-dark; }
+  }
   &--outline {
     color: inherit;
     &:before {
@@ -33,11 +36,11 @@
       @include transition;
     }
   }
-  &--outline-orange {
-    &:before { border-color: $orange; }
+  &--outline-red {
+    &:before { border-color: $v-red; }
     &:hover {
-      background-color: $orange;
-      &:before { border-color: $orange; }
+      background-color: $v-red;
+      &:before { border-color: $v-red; }
     }
   }
 }

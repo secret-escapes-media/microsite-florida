@@ -15,8 +15,27 @@
       padding-top: 2px;
     }
   }
-  &--partner { // max-width for this is about 150x46px
-    max-width: 120px;
-    &-sm { max-width: 100px; }
+
+  // logo size for Virgin Holidays
+  &--vh { // max-width for this is about 150x46px
+    max-width: 140px;
+    &-sm { max-width: 110px; }
   }
+
+  // logo size for Visit Florida
+  &--vf { // max-width for this is about 150x46px
+    max-width: 110px;
+    &-sm { max-width: 90px; }
+  }
+
+  &--walt-disney-world-resort { max-width: 250px; }
+  &--legoland-florida { max-width: 200px; }
+  &--st-pete-clearwater { max-width: 210px; }
+  &--greater-fort-lauderdale { max-width: 280px; }
+  &--naples-marco-island-everglades { max-width: 220px; }
+  &--daytona-beach { max-width: 160px; }
+
+
+
+
 }

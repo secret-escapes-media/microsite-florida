@@ -1,1 +1,33 @@
 // general styles for the project that wouldn't be a reuseable component
+
+.width {
+  margin-right: auto;
+  margin-left: auto;
+  &--xs { max-width: ($sm / 2); }
+  &--sm { max-width: $sm; }
+  &--md { max-width: $md; }
+  &--lg { max-width: $lg; }
+  &--xl { max-width: $xl; }
+  &--xxl { max-width: $xxl; }
+}
+
+.banner-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+
+
+}
+
+.map {
+  * { color: $white !important; }
+}
+
+.title-sup {
+  font-size: .33em;
+  line-height: 1;
+  vertical-align: top;
+  padding-top: 8px; display: inline-block; // minor nudges to adjust for raleway line height
+}

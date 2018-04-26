@@ -12,9 +12,13 @@
   color: $white;
   background-color: $grey;
   @include bp($lg){
-    height: 90%;
-    min-height: 650px;
+    height: 60%;
+    min-height: 600px;
     max-height: none;
+    &--overview {
+      height: 80%;
+      min-height: 650px;
+    }
   }
   &__wrap {
     position: relative;
