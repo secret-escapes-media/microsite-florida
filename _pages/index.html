@@ -5,10 +5,6 @@ nav: true
 nav-order: 1
 title: Overview
 
-banner:
-  content: >
-    <h1 class="banner-title banner-title--overview text--center">Florida</h1>
-
 features:
 
   - id: adventure
@@ -17,16 +13,28 @@ features:
 
   - id: family-fun
     title: Family Fun
-    description: With world-leading resorts and theme parks, Florida is a perfect family destination. From Disney World Resort to Legoland® and more, this is the land of family fun, framed by irresistible sunshine and unforgettable adventures.
+    description: With world-leading resorts and theme parks, Florida is a perfect family destination. From <em>Walt Disney World</em> Resort in Florida to LEGOLAND<sup>®</sup> Florida Resort and more, this is the land of family fun, framed by irresistible sunshine and unforgettable adventures.
+
+
+vh-features:
+
+  - id: no1-to-florida
+    title: No1 to Florida
+    description: With more than 30 years’ experience curating Florida getaways, Virgin Holidays should be your No1 choice for jetting off to the Sunshine State. Rely on your Florida experts to offer unmissable holiday packages, perfect for exploring all that Florida has to offer.
+
+  - id: the-virgin-way
+    title: The Virgin Way
+    description: From v-room airport lounges at Gatwick and Manchester to local resort experts on-hand at your destination, Virgin Holidays are set to take care of all of your needs. Fly with Virgin Atlantic and touch down relaxed, refreshed and ready to discover Florida.
 ---
 
 <div class="bg--light vpad--xxl">
   <div class="container container--xl text--center text--lg ">
     <p>{{site.description}}</p>
-    <p>It’s a bonafide hotbed of diversity – where else can you keep the kids happy with world-leading theme parks, explore a vibrant arts scene and kick-back on powder sand beaches across more than 220 sunny days a year? Explore pristine state parks, beguiling swamps that teem with unique wildlife, or head for chic waterside towns packed with irresistible dining and nightlife. Discover this buzzing state with Virgin Holidays, with multi-stop breaks tailored to all types of traveller.</p>
+    <p>It’s a bonafide hotbed of diversity – where else can you keep the kids happy with world-leading theme parks, explore a vibrant arts scene and kick-back on powder sand beaches across more than 220 sunny days a year? Explore pristine state parks, beguiling wetlands that teem with unique wildlife, or head for chic waterside towns packed with irresistible dining and nightlife.</p>
+    <p>Discover this buzzing state with <strong class="text--red">Virgin Holidays</strong>, with multi-stop breaks tailored to all types of traveller.</p>
     <div class="space--xl"></div>
     <div class="video js-youtube-thumbnail" data-thumbnail-img="{{site.img}}/video-thumbnail.jpg">
-      <iframe class="video__iframe" src='https://www.youtube.com/embed/########?rel=0&amp;showinfo=0' frameborder='0' allowfullscreen="allowfullscreen"></iframe>
+      <iframe class="video__iframe" src='https://www.youtube.com/embed/aR1VdCd13II?rel=0&amp;showinfo=0' frameborder='0' allowfullscreen="allowfullscreen"></iframe>
     </div>
     <div class="space--xl"></div>
     <div class="text--center">
@@ -41,9 +49,24 @@ features:
       <div class="col text--center">
         <div class="bg-img bg-img--3-2" style="background-image: url('{{site.img}}/content/overview/{{feature.id}}.jpg');"></div>
         <div class="space--md"></div>
-        <h2 class="title title--lg text--blue">{{feature.title}}</h2>
+        <h2 class="title title--lg">{{feature.title}}</h2>
         <p>{{feature.description}}</p>
       </div>
     {% endfor %}
+  </div>
+</div>
+
+<div class="bg--light">
+  <div class="container vpad--xxl">
+    <div class="row row--6-6">
+      {% for feature in page.vh-features %}
+      <div class="col text--center">
+        <div class="bg-img bg-img--3-2" style="background-image: url('{{site.img}}/content/overview/{{feature.id}}.jpg');"></div>
+        <div class="space--md"></div>
+        <h2 class="title title--lg">{{feature.title}}</h2>
+        <p>{{feature.description}}</p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>

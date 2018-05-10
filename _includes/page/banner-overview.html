@@ -1,0 +1,24 @@
+<div class="banner banner--{{page.id}} map-banner js-map-banner">
+  <div class="banner__bg" style="background-image: url('{{site.img}}/content/{{page.id}}/bg.jpg')"></div>
+  <div class="map-banner__wrap">
+    <div class="map-banner__map map">
+      <div class="js-map-hover-active map-banner__active"></div>
+      {% assign all-pages = site.html_pages | where: 'content-pages', 'true' | sort: 'nav-order' %}
+      {% for content-page in all-pages %}
+        <a class="map__marker map__marker--{{content-page.id}} {% if page.id == content-page.id %} is-current{% endif %}" href="{{site.baseurl}}{{content-page.url}}" style="top: {{content-page.map-position.top}}; right: {{content-page.map-position.right}};">
+          <span class="map__marker-label-wrap">
+            <span class="map__marker-label">{{content-page.title}}</span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="map-banner__title">
+      <div class="site-header__offset"></div>
+      {% if page.id =="overview" %}
+          <h1 class="banner-title banner-title--overview">Florida</h1>
+        {% else %}
+          <h1 class="banner-title">{{page.title}}</h1>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,240 @@
+// This is a modified version of the banner, to hold a map of florida
+
+$map-bp: 1080px;
+
+.map-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  max-height: 730px;
+  color: $white;
+  background-color: $grey;
+  overflow: hidden;
+  &.is-open {
+    // height: 730px;
+    height: auto;
+
+    &:before {
+      // this is a hack to keep the maps aspect ratio for its width
+      content: '';
+      display: block;
+      width: 100%;
+      padding-top: 125%; // this is roughly the height of the banner when at max width
+    }
+
+  }
+  // @include bp($lg){
+  //   height: 730px;
+  // }
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-content;
+    background-color: $grey-dark;
+    @include background-attributes;
+  }
+  &__wrap {
+    position: absolute;
+    z-index: $z-map-01;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: $xxxl;
+    margin-left: auto;
+    margin-right: auto;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    @include page-padding;
+    &--map {
+      z-index: $z-map-03;
+      display: none;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: center;
+      @include bp($map-bp){
+        display: block;
+        text-align: right;
+        @include page-padding;
+      }
+    }
+    &--title {
+      z-index: $z-map-01;
+    }
+  }
+  &.is-open &__wrap--map { display: block; }
+  &.is-open &__wrap--title { display: none; }
+  &__map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  &__title {
+    text-align: center;
+    @include bp($map-bp){
+      margin-right: 460px;
+      text-align: left;
+    }
+  }
+  &__active {
+    // area for mouse hover over on map
+    position: absolute;
+    top: $core-nav-height;
+    left: 24%;
+    right: 0;
+    z-index: $z-content;
+    display: none;
+    height: 100%;
+    max-height: 660px;
+    @include bp($map-bp){
+      display: block;
+    }
+  }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-map-02;
+    display: none;
+    background-color: rgba($grey-darkest,.4);
+    opacity: 0;
+    @include transition;
+    @include bp($map-bp){
+      display: block;
+      background: linear-gradient(90deg, rgba($grey-darkest,0) 0%, rgba($grey-darkest,.5) 50%);
+    }
+  }
+  &.is-active &__overlay { opacity: 1; }
+  &.is-open &__overlay {
+    display: block;
+    opacity: 1;
+  }
+  &__mobile-ui {
+    @include bp($map-bp){ display: none; }
+  }
+  &__corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: $z-map-01;
+  }
+  &.is-open &__corner { display: none; }
+}
+
+
+
+.map {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 625px;
+  margin-left: -15%; // offset the state shape so it looks more center
+  background-image: url('../img/florida-outline.png');
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  @include bp($map-bp){
+    margin-left: 0;
+  }
+  &:before {
+    // this is a hack to keep the maps aspect ratio for its width
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: 150.08%; // this is roughly the height of the banner when at max width
+  }
+
+  &__marker {
+    position: absolute;
+    z-index: $z-content-upper;
+    @include transition;
+    &:hover {
+      z-index: $z-map-04;
+
+    }
+  }
+
+
+  $marker-icon-height: 47px;
+  $marker-icon-width: 38px;
+  &__marker-icon {
+    position: absolute;
+    top: -($marker-icon-width / 1.25);
+    left: -(($marker-icon-width / 1.25) / 2); // width / 2
+    display: block;
+    width: ($marker-icon-width / 1.25);
+    height: ($marker-icon-height / 1.25);
+    background-image: url('../img/icons/map-pin-dark.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    @include transition;
+    transform-origin: bottom center;
+    @include bp($lg){
+      top: -$marker-icon-height;
+      left: -($marker-icon-width / 2); // width / 2
+      width: $marker-icon-width;
+      height: $marker-icon-height;
+    }
+  }
+
+  $marker-label-width: 200px;
+  &__marker-label-wrap {
+    position: absolute;
+    top: 8px;
+    left: -(($marker-label-width / 1.5) / 2);
+    width: ($marker-label-width / 1.5);
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    @include transition;
+    @include bp($lg){
+      left: -($marker-label-width / 2);
+      width: $marker-label-width;
+    }
+  }
+
+  &__marker-label {
+    display: block;
+    font-family: $font-title-01;
+    font-weight: 400;
+    font-size: $s0;
+    letter-spacing: .075rem;
+    line-height: 1.25;
+    text-shadow: 0 4px 25px $black;
+    @include bp($lg){
+      font-size: $s1;
+    }
+  }
+  &__marker:hover &__marker-icon,
+  &__marker.is-current &__marker-icon { transform: scale(1.33); }
+  &__marker.is-current &__marker-icon { background-image: url('../img/icons/map-pin.png'); }
+  &__marker:hover &__marker-label-wrap,
+  .is-open &__marker-label-wrap {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.magic-button {
+  position: absolute;
+  top: 480px;
+  left: 42px;
+  z-index: $z-map-04;
+  display: none;
+  &__wrap {
+    position: relative;
+  }
+  @include bp($map-bp) {
+    display: block;
+  }
+}

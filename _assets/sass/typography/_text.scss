@@ -19,7 +19,8 @@
   // colours
   &--white { color: $grey-lightest; }
   &--black { color: $grey-dark; }
-  &--blue { color: $v-blue-dark; }
+  &--blue  { color: $v-blue-dark; }
+  &--red   { color: $v-red; }
 
   // alignment
   &--left   { text-align: left; }

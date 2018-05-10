@@ -5,7 +5,7 @@
       {% include components/logo-partner.html placement="footer" small='true' %}
     </div>
     <div class="space--md text--sm">
-      <p>© Copyright <span class="js-year">2017</span> Secret Escapes</p>
+      <p>© Copyright <span class="js-year">2018</span> Secret Escapes{% if page.image-credits %} &nbsp;|&nbsp; <a class="js-open-modal" data-open-modal="image-credits-{{page.id}}">Images © {{page.title}}</a>{% endif %}</p>
     </div>
   </div>
 </footer>

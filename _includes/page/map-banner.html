@@ -1,0 +1,50 @@
+<div class="map-banner js-map-banner">
+
+  <div class="map-banner__bg" style="background-image: url('{{site.img}}/content/{{page.id}}/bg.jpg')"></div>
+
+  {% if page.id =="overview" %}
+    <div class="container magic-button__wrap">
+      <div class="magic-button"><a class="js-open-map js-magic-button btn btn--red">Explore the Map</a></div>
+    </div>
+  {% endif %}
+
+  <div class="map-banner__wrap map-banner__wrap--title">
+    <div class="map-banner__title">
+      <div class="site-header__offset"></div>
+      {% if page.id =="overview" %}
+        <h1 class="banner-title banner-title--overview banner-title--stamp">Florida</h1>
+        <div>
+          <a class="js-open-map map-banner__mobile-ui btn btn--red">Explore the Map</a>
+        </div>
+      {% else %}
+        <h1 class="banner-title">{% if page.banner.title %}{{page.banner.title}}{% else %}{{page.title}}{% endif %}</h1>
+      {% endif %}
+    </div>
+  </div>
+
+  {% unless page.id=="overview" %}
+  <div class="map-banner__corner map-banner__mobile-ui">
+    <a class="js-open-map corner-map-btn"><span class="corner-map-btn__text">
+      <img class="corner-map-btn__icon" src="{{site.img}}/icons/map-pin-white.png" alt="Map pin icon"> Open Map</span></a>
+  </div>
+  {% endunless %}
+
+  <div class="map-banner__overlay"></div>
+
+  <div class="map-banner__wrap map-banner__wrap--map">
+    <div class="map-banner__map map">
+      <div class="js-map-hover-active map-banner__active"></div>
+      <div class="js-close-map map-banner__close"></div>
+      {% assign all-pages = site.html_pages | where: 'content-pages', 'true' | sort: 'nav-order' %}
+      {% for content-page in all-pages %}
+        <a class="map__marker map__marker--{{content-page.id}} {% if page.id == content-page.id %} is-current{% endif %}" href="{{site.baseurl}}{{content-page.url}}" style="top: {{content-page.map-position.top}}; left: {{content-page.map-position.left}};">
+          <span class="map__marker-icon"></span>
+          <span class="map__marker-label-wrap">
+            <span class="map__marker-label">{{content-page.title}}</span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
