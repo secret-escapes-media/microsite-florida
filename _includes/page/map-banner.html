@@ -2,12 +2,6 @@
 
   <div class="map-banner__bg" style="background-image: url('{{site.img}}/content/{{page.id}}/bg.jpg')"></div>
 
-  {% if page.id =="overview" %}
-    <div class="container magic-button__wrap">
-      <div class="magic-button"><a class="js-open-map js-magic-button btn btn--red">Explore the Map</a></div>
-    </div>
-  {% endif %}
-
   <div class="map-banner__wrap map-banner__wrap--title">
     <div class="map-banner__title">
       <div class="site-header__offset"></div>
@@ -29,21 +23,28 @@
   </div>
   {% endunless %}
 
-  <div class="map-banner__overlay"></div>
-
   <div class="map-banner__wrap map-banner__wrap--map">
+    <div class="site-header__offset"></div>
     <div class="map-banner__map map">
-      <div class="js-map-hover-active map-banner__active"></div>
       <div class="js-close-map map-banner__close"></div>
       {% assign all-pages = site.html_pages | where: 'content-pages', 'true' | sort: 'nav-order' %}
       {% for content-page in all-pages %}
-        <a class="map__marker map__marker--{{content-page.id}} {% if page.id == content-page.id %} is-current{% endif %}" href="{{site.baseurl}}{{content-page.url}}" style="top: {{content-page.map-position.top}}; left: {{content-page.map-position.left}};">
+        <a class="map__marker map__marker--{{content-page.id}}{% if page.id == content-page.id %} is-current{% endif %}" href="{{site.baseurl}}{{content-page.url}}" style="top: {{content-page.map-position.top}}; left: {{content-page.map-position.left}};">
           <span class="map__marker-icon"></span>
-          <span class="map__marker-label-wrap">
-            <span class="map__marker-label">{{content-page.title}}</span>
+          <span class="map__marker-label-wrap{% if content-page.map-position.label-right %} map__marker-label-wrap--right{% endif %}">
+            <span class="map__marker-label">{% if content-page.map-position.label %}{{content-page.map-position.label}}{% else %}{{content-page.title}}{% endif %}</span>
           </span>
         </a>
       {% endfor %}
+    </div>
+    <div class="map-banner__map-list text--white">
+      <ul class="map__list">
+        <div class="site-header__offset"></div>
+        {% assign all-pages = site.html_pages | where: 'content-pages', 'true' | sort: 'map-position.top' %}
+        {% for content-page in all-pages %}
+        <li class="{% if page.id == content-page.id %} is-current{% endif %}"><a class="map__list-link map__marker-label map__marker-label--list" href="{{site.baseurl}}{{content-page.url}}">{{content-page.title}}</a></li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 

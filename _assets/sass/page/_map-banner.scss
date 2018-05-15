@@ -16,13 +16,14 @@ $map-bp: 1080px;
   &.is-open {
     // height: 730px;
     height: auto;
+    min-height: 400px;
 
     &:before {
       // this is a hack to keep the maps aspect ratio for its width
       content: '';
       display: block;
       width: 100%;
-      padding-top: 125%; // this is roughly the height of the banner when at max width
+      padding-top: 115%; // this is roughly the height of the banner when at max width
     }
 
   }
@@ -68,7 +69,10 @@ $map-bp: 1080px;
       z-index: $z-map-01;
     }
   }
-  &.is-open &__wrap--map { display: block; }
+  &.is-open &__wrap--map {
+    display: block;
+    text-align: center;
+  }
   &.is-open &__wrap--title { display: none; }
   &__map {
     position: absolute;
@@ -76,6 +80,25 @@ $map-bp: 1080px;
     left: 0;
     right: 0;
     bottom: 0;
+  }
+  &__map-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-map-04;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($grey-darker,.33);
+    text-align: left;
+    padding-top: $s2;
+    padding-bottom: $s2;
+    @include page-padding;
+    @include bp(550px){
+      display: none;
+    }
   }
   &__title {
     text-align: center;
@@ -137,21 +160,17 @@ $map-bp: 1080px;
   position: relative;
   display: inline-block;
   width: 100%;
-  max-width: 625px;
-  margin-left: -15%; // offset the state shape so it looks more center
+  max-width: 660px;
   background-image: url('../img/florida-outline.png');
   background-position: top left;
   background-repeat: no-repeat;
-  background-size: auto 100%;
-  @include bp($map-bp){
-    margin-left: 0;
-  }
+  background-size: contain;
   &:before {
     // this is a hack to keep the maps aspect ratio for its width
     content: '';
     display: block;
     width: 100%;
-    padding-top: 150.08%; // this is roughly the height of the banner when at max width
+    padding-top: 100%; // this is roughly the height of the banner when at max width
   }
 
   &__marker {
@@ -160,13 +179,12 @@ $map-bp: 1080px;
     @include transition;
     &:hover {
       z-index: $z-map-04;
-
     }
   }
 
 
-  $marker-icon-height: 47px;
-  $marker-icon-width: 38px;
+  $marker-icon-height: 27px;
+  $marker-icon-width: 22px;
   &__marker-icon {
     position: absolute;
     top: -($marker-icon-width / 1.25);
@@ -187,19 +205,41 @@ $map-bp: 1080px;
     }
   }
 
-  $marker-label-width: 200px;
+  $marker-label-width: 150px;
   &__marker-label-wrap {
     position: absolute;
     top: 8px;
     left: -(($marker-label-width / 1.5) / 2);
     width: ($marker-label-width / 1.5);
     text-align: center;
-    visibility: hidden;
-    opacity: 0;
     @include transition;
     @include bp($lg){
+      top: 5px;
       left: -($marker-label-width / 2);
       width: $marker-label-width;
+    }
+    &--right {
+      top: -(($marker-icon-height / 1.25) - 3);
+      left: auto;
+      right: (($marker-icon-width / 1.25) - 4);
+      height: ($marker-icon-height / 1.25);
+      width: $marker-label-width;
+      text-align: right;
+      @include bp($lg){
+        top: -($marker-icon-height);
+        right: ($marker-icon-width - 5);
+        height: $marker-icon-height;
+      }
+    }
+    // hides labels when there is no space
+    display: none;
+    @include bp(550px){
+      display: block;
+      &--right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
     }
   }
 
@@ -207,23 +247,38 @@ $map-bp: 1080px;
     display: block;
     font-family: $font-title-01;
     font-weight: 400;
-    font-size: $s0;
+    font-size: 11px;
     letter-spacing: .075rem;
     line-height: 1.25;
-    text-shadow: 0 4px 25px $black;
+    text-shadow: 0 4px 25px rgba($black,.25);
     @include bp($lg){
-      font-size: $s1;
+      font-size: 12px;
     }
+    &--list { font-size: ($s1 * 1.1);}
   }
   &__marker:hover &__marker-icon,
-  &__marker.is-current &__marker-icon { transform: scale(1.33); }
   &__marker.is-current &__marker-icon { background-image: url('../img/icons/map-pin.png'); }
-  &__marker:hover &__marker-label-wrap,
-  .is-open &__marker-label-wrap {
-    opacity: 1;
-    visibility: visible;
+  &__marker.is-current &__marker-icon {
+    transform: scale(1.5);
+    @include bp(550px){
+      transform: scale(1);
+    }
+  }
+
+
+
+  &__list {
+    li {
+      padding-top: $s-4;
+      padding-bottom: $s-4;
+      &.is-current { color: $v-red-dark; }
+      a { color: $white;
+      font-weight: 500; }
+    }
   }
 }
+
+.map__marker--greater-fort-lauderdale .map__marker-label-wrap--right { width: auto; }
 
 .magic-button {
   position: absolute;
