@@ -91,15 +91,21 @@
   // custom banner headline
   font-family: $font-title-01;
   font-weight: 700;
-  font-size: $s10;
   letter-spacing: .05rem;
   line-height: 1;
-
   @include font-smoothing;
+
+  font-size: $s6;
+  @include bp($sm){ font-size: $s7; }
+  @include bp($md){ font-size: $s8; }
+  @include bp($lg){ font-size: $s10; }
 
   &--overview {
     font-weight: 600;
-    font-size: $s13;
+    font-size: $s9;
+    @include bp($sm){ font-size: $s10; }
+    @include bp($md){ font-size: $s11; }
+    @include bp($lg){ font-size: $s13; }
   }
   &--stamp {
     position: relative;
@@ -108,16 +114,25 @@
       // virgin holidays badge to show behind title
       content: '';
       position: absolute;
-      top: -($s13);
+      top: -($s9);
       left: 0;
       display: block;
-      width: $s13;
-      height: $s13;
+      width: $s9;
+      height: $s9;
       background-image: url('../img/vh-badge.svg');
       background-repeat: no-repeat;
       transform: rotate(-10deg);
       overflow: visible;
-
+      @include bp($md){
+        top: -($s10);
+        width: $s10;
+        height: $s10;
+      }
+      @include bp($lg){
+        top: -($s13);
+        width: $s13;
+        height: $s13;
+      }
     }
   }
 
