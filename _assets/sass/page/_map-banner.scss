@@ -107,6 +107,13 @@ $map-bp: 1080px;
     z-index: $z-map-01;
   }
   &.is-open &__corner { display: none; }
+  &__desktop-sub-title {
+    display: none;
+    @include bp($map-bp) {
+      display: block;
+      margin-left: 11px; // align sub title with large title
+    }
+  }
 }
 
 .map {
