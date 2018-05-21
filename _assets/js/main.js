@@ -8,3 +8,14 @@ $('.js-open-map').on('click', function () {
 $('.js-close-map').on('click', function () {
   $('.js-map-banner').removeClass('is-open');
 })
+
+// cache buster for impression pixel
+var axel = Math.random() + "";
+var a = parseInt(axel * 10000000000000);
+$('.js-cache-buster img').each(function() {
+  var pixelSrc = $(this).attr('src');
+  var newPixelSrc = pixelSrc.replace(/\[timestamp\]/g, a);
+  console.log(pixelSrc);
+  console.log('changes to');
+  console.log(newPixelSrc);
+});
